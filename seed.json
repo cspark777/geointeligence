@@ -1,0 +1,12 @@
+[
+{
+    "model": "geointeligence.indicator",
+    "pk": 1,
+    "fields": {
+        "indicator_01": "62.3",
+        "indicator_02": "25.7",
+        "indicator_03": "82.9",
+        "date": "2022-03-31 00:00:00"
+    }
+}
+]
