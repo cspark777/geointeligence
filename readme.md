@@ -20,6 +20,7 @@ all main fiels are inside django_website directory as it is main project
 - settings.py- for all settings
 
 ### Install
+- create new database "geointeligence" in PostgreSQL
 - python manage.py migrate
 - python manage.py loaddata seed.json
 - python manage.py createsuperuser
