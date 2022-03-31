@@ -1,0 +1,82 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />    <meta name="author" content="INSPIRO" />    
+	<meta name="description" content="Themeforest Template Polo, html template">
+    <link rel="icon" type="image/png" href="images/favicon.png">   
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- Document title -->
+    <title>Smart Analytics | Register</title>
+    <!-- Stylesheets & Fonts -->
+    <link href="{% static 'theme/css/plugins.css' %}" rel="stylesheet">
+    <link href="{% static 'theme/css/style.css' %}" rel="stylesheet">
+</head>
+
+<body>
+    <!-- Body Inner -->
+    <div class="body-inner">
+        <!-- Section -->
+        <section class="fullscreen" style="background-image: url({% static 'theme/images/pages/1.jpg' %})">
+            <div class="container container-fullscreen">
+                <div class="text-middle">                    
+                    <div class="row">
+                        <div class="col-lg-6 center p-40 background-white b-r-6">
+                            <form class="form-transparent-grey" action="register" method ="post">
+                                {% csrf_token %}
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <h3>Register New Account</h3>
+                                        <p>Create an account by entering the information below. If you are a returning customer please login at the top of the page.</p>
+                                    </div>
+                                    <div class="col-lg-6 form-group">
+                                        <label class="sr-only">First Name</label>
+                                        <input type="text" name="first_name" value="" placeholder="First Name" class="form-control">
+                                    </div>
+                                    <div class="col-lg-6 form-group">
+                                        <label class="sr-only">Last Name</label>
+                                        <input type="text" name="last_name" value="" placeholder="Last Name" class="form-control">
+                                    </div>
+                                    <div class="col-lg-6 form-group">
+                                        <label class="sr-only">Username</label>
+                                        <input type="text" name="username" value="" placeholder="Username" class="form-control">
+                                    </div>
+                                    <div class="col-lg-6 form-group">
+                                        <label class="sr-only">Email</label>
+                                        <input type="email" name="email" value="" placeholder="Email" class="form-control">
+                                    </div>
+                                    <div class="col-lg-6 form-group">
+                                        <label class="sr-only">Password</label>
+                                        <input type="password" name="password" value="" placeholder="Password" class="form-control">
+                                    </div>
+                                    <div class="col-lg-6 form-group">
+                                        <label class="sr-only">Password</label>
+                                        <input type="password" name="c_password" value="" placeholder="Confirm Password" class="form-control">
+                                    </div>                                    
+                                    <div class="col-lg-12 form-group">
+                                        <button class="btn" type="submit">Register New Account </button>
+                                        <button type="button" class="btn btn-danger m-l-10">Cancel</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- end: Section -->
+    </div>
+    <!-- end: Body Inner -->
+    <!-- Scroll top -->
+    <a id="scrollTop"><i class="icon-chevron-up"></i><i class="icon-chevron-up"></i></a>
+    <!--Plugins-->
+    <script src="{% static 'theme/js/jquery.js' %}"></script>
+    <script src="{% static 'theme/js/plugins.js' %}"></script>
+    <!--Template functions-->
+    <script src="{% static 'theme/js/functions.js' %}"></script>
+</body>
+
+</html>

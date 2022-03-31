@@ -1,0 +1,102 @@
+{% extends "common/base_dashboard.html" %}
+{% block content %}
+{% load static %}
+        
+ <!-- centiment -->
+ <div class="dashboard" style="margin-top: 30px;">
+ <section id="centiment">
+     <div class="container">
+         <div class="row">
+            <div class="col-12 col-md-12 col-lg-12">
+                <div class="heading-text heading-section">
+                    <h4>Datos en timepo real</h4>
+                </div>                
+                <div>
+                    <canvas id="chart1" width="350" height="250" style="display: block; width: 350px; height: 250px;" class="chartjs-render-monitor"></canvas>
+                
+                </div>
+            </div>
+         </div>
+     </div>
+ </section>
+ <!-- end: centiment -->
+
+ <!-- topic -->
+ <section id="topic">
+     <div class="container">
+        <div class="row">
+            <div class="heading-text heading-section">
+                <h4 style="margin-bottom: 0px;">Topic</h4>
+            </div>
+        </div>        
+        <div class="row">
+            <input type="hidden" id="topic_name" value="{{ topic_name }}">
+            <input type="hidden" id="topic_frequency" value="{{ topic_frequency }}">
+            <div class="col-6 col-md12 col-lg-6">
+                <canvas id="topic1_chart" width="350" height="250" style="display: block; width: 350px; height: 250px;" class="chartjs-render-monitor"></canvas>                
+            </div>
+            <div class="col-6 col-md12 col-lg-6">
+                <canvas id="topic2_chart" width="350" height="250" style="display: block; width: 350px; height: 250px;" class="chartjs-render-monitor"></canvas>                
+            </div>
+         </div>
+     </div>
+ </section>
+ <!-- end: topic -->
+
+ <!-- Indicators -->
+ <section id="indicator">
+     <div class="container">
+        <div class="row">
+            <div class="heading-text heading-section">
+                <h4 style="margin-bottom: 0px;">Indicator</h4>
+            </div>
+        </div>        
+        <div class="row">
+            <input type="hidden" id="indicator_data" value="{{ indicators }}">
+            
+            <div class="col-4 col-md12 col-lg-4">
+                <div id="indicator0"></div>
+            </div>
+            <div class="col-4 col-md12 col-lg-4">
+                <div id="indicator1"></div>
+            </div>
+            <div class="col-4 col-md12 col-lg-4">
+                <div id="indicator2"></div>
+            </div>
+
+        </div>
+     </div>
+ </section>
+ <!-- end: Indicators -->
+
+  <!-- Communa -->
+ <section id="communa">
+     <div class="container">
+        <div class="row">
+            <div class="heading-text heading-section">
+                <h4 style="margin-bottom: 0px;">Communa</h4>
+            </div>
+        </div>        
+        <div class="row">
+            <div class="col-12 col-md12 col-lg-12">
+            <form method="POST" action="/communa_download">
+                {% csrf_token %}                
+                <select class="select-2" id="communas" name="communas[]" multiple="multiple">
+                {% for c in communas %} 
+                    <option value="{{ c.name }}">{{ c.name }}</option>
+                {% endfor %}
+                </select>
+
+                <button type="submit" class="btn">Default</button>
+
+            </form>
+            </div>
+                
+            
+        </div>
+     </div>
+ </section>
+ <!-- end: communa -->
+
+</div>
+{% endblock %}
