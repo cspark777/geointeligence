@@ -4,7 +4,7 @@ import csv
 
 conn = psycopg2.connect(database="geointeligence",
                         user='postgres', password='password', 
-                        host='127.0.0.1', port='5432'
+                        host='localhost', port='5432'
 )
   
 conn.autocommit = True
