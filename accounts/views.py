@@ -10,7 +10,7 @@ from django.utils.encoding import force_bytes, force_str
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.template.loader import render_to_string
 from .tokens import account_activation_token
-from django.core.mail import EmailMessage
+from django.core.mail import EmailMessage, send_mail
 
 # Create your views here.
 
@@ -61,10 +61,14 @@ def register(request):
                     'token':account_activation_token.make_token(user),
                 })
                 to_email = email
+
+                send_mail(mail_subject, message, 'rodinaleksandr0103@gmail.com', [to_email])
+                '''
                 email = EmailMessage(
                             mail_subject, message, to=[to_email]
                 )
                 email.send()
+                '''
                 return HttpResponse('Please confirm your email address to complete the registration')
 
 
