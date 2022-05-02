@@ -62,7 +62,11 @@ def register(request):
                 })
                 to_email = email
 
-                send_mail(mail_subject, message, 'rodinaleksandr0103@gmail.com', [to_email])
+                a = send_mail(mail_subject, message, 'rodinaleksandr0103@gmail.com', [to_email])
+
+                print("==============")
+                print(a)
+                
                 '''
                 email = EmailMessage(
                             mail_subject, message, to=[to_email]
