@@ -62,17 +62,13 @@ def register(request):
                 })
                 to_email = email
 
-                a = send_mail(mail_subject, message, 'rodinaleksandr0103@gmail.com', [to_email])
-
-                print("==============")
-                print(a)
+                #send_mail(mail_subject, message, 'rodinaleksandr0103@gmail.com', [to_email])
                 
-                '''
                 email = EmailMessage(
                             mail_subject, message, to=[to_email]
                 )
                 email.send()
-                '''
+                
                 return HttpResponse('Please confirm your email address to complete the registration')
 
 
