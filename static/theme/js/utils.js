@@ -120,6 +120,56 @@ window.chartColors = {
 		transparentize: function(color, opacity) {
 			var alpha = opacity === undefined ? 0.5 : 1 - opacity;
 			return Color(color).alpha(alpha).rgbString();
+		},
+
+		createrandomdata: function(n, range, rand, date_term) {
+		  if (range == null) range = [0, 100];
+		  if (rand == null) rand = 1 / 20;
+
+		  var d = new Date(), interval = 0;
+		  if(date_term == 'h'){
+		  	d = new Date(d.getTime() - 1000 * 60 * 60); 
+		  	interval = 1000 * 60 * 60 / n;
+		  }
+		  else if(date_term == 'd'){
+		  	d = new Date(d.getTime() - 1000 * 60 * 60 * 24); 
+		  	interval = 1000 * 60 * 60 * 24 / n;	
+		  }
+		  else if(date_term == 'w'){
+		  	d = new Date(d.getTime() - 1000 * 60 * 60 * 24 * 7); 
+		  	interval = 1000 * 60 * 60 * 24 * 7 / n;	
+		  }
+		  else if(date_term == 'm'){
+		  	d = new Date(d.getTime() - 1000 * 60 * 60 * 24 * 30); 
+		  	interval = 1000 * 60 * 60 * 24 * 30 / n;	
+		  }
+		  else if(date_term == 'y'){
+		  	d = new Date(d.getTime() - 1000 * 60 * 60 * 24 * 365); 
+		  	interval = 1000 * 60 * 60 * 24 * 365 / n;	
+		  }
+		  
+
+		  var num = range[0] + Math.floor(Math.random() * (range[1] - range[0]));
+		  var num2 = range[0] + Math.floor(Math.random() * (range[1] - range[0]));
+		  var num3 = num;
+		  
+		  var data = [];
+		  var rgen = d3.randomNormal(0, (range[1] - range[0]) * rand);
+		  for (var i = 0; i < n; i++) {
+		    data.push({
+		      date: d,
+		      negative: num,
+		      netural: num2,
+		      positive: num3,		      
+		    });
+		    d = new Date(d.getTime() + interval);
+		    num = num + rgen();
+		    num3 = num + rgen() / 3;
+		    num = Math.min(Math.max(num, range[0]), range[1]);
+		    num2 = num2 + rgen();
+		    num2 = Math.min(Math.max(num2, range[0]), range[1]);
+		  }
+		  return data;
 		}
 	};
 
@@ -145,3 +195,4 @@ window.chartColors = {
 	/* eslint-enable */
 
 }(this));
+

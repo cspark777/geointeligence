@@ -2,101 +2,126 @@
 {% block content %}
 {% load static %}
         
- <!-- centiment -->
- <div class="dashboard" style="margin-top: 30px;">
- <section id="centiment">
-     <div class="container">
-         <div class="row">
-            <div class="col-12 col-md-12 col-lg-12">
-                <div class="heading-text heading-section">
-                    <h4>Datos en timepo real</h4>
-                </div>                
-                <div>
-                    <canvas id="chart1" width="350" height="250" style="display: block; width: 350px; height: 250px;" class="chartjs-render-monitor"></canvas>
-                
-                </div>
-            </div>
-         </div>
-     </div>
- </section>
- <!-- end: centiment -->
-
- <!-- topic -->
- <section id="topic">
-     <div class="container">
-        <div class="row">
-            <div class="heading-text heading-section">
-                <h4 style="margin-bottom: 0px;">Topic</h4>
-            </div>
-        </div>        
-        <div class="row">
-            <input type="hidden" id="topic_name" value="{{ topic_name }}">
-            <input type="hidden" id="topic_frequency" value="{{ topic_frequency }}">
-            <div class="col-6 col-md12 col-lg-6">
-                <canvas id="topic1_chart" width="350" height="250" style="display: block; width: 350px; height: 250px;" class="chartjs-render-monitor"></canvas>                
-            </div>
-            <div class="col-6 col-md12 col-lg-6">
-                <canvas id="topic2_chart" width="350" height="250" style="display: block; width: 350px; height: 250px;" class="chartjs-render-monitor"></canvas>                
-            </div>
-         </div>
-     </div>
- </section>
- <!-- end: topic -->
-
- <!-- Indicators -->
- <section id="indicator">
-     <div class="container">
-        <div class="row">
-            <div class="heading-text heading-section">
-                <h4 style="margin-bottom: 0px;">Indicator</h4>
-            </div>
-        </div>        
-        <div class="row">
-            <input type="hidden" id="indicator_data" value="{{ indicators }}">
-            
-            <div class="col-4 col-md12 col-lg-4">
-                <div id="indicator0"></div>
-            </div>
-            <div class="col-4 col-md12 col-lg-4">
-                <div id="indicator1"></div>
-            </div>
-            <div class="col-4 col-md12 col-lg-4">
-                <div id="indicator2"></div>
-            </div>
-
+<!-- centiment -->
+<div class="dashboard" style="margin-top: 30px;">
+  <section id="centiment" style="padding: 0px;">
+    <div class="container">
+      <div class="row">
+        <div class="col-12 col-md-12 col-lg-12 heading-text heading-section">                
+            <h4>Datos en timepo real</h4>
         </div>
-     </div>
- </section>
- <!-- end: Indicators -->
+      </div>
+      <div class="row" style="margin-bottom: 15px;">
+        <div id="chart1_legend" class="col-12 col-md-6 col-lg-6" style="height: 30px;"></div>        
+        <div id="chart1_tools" class="col-12 col-md-6 col-lg-6" style="height: 30px;">
+          <button type="button" class="btn btn-light btn-sm btn-time" data="h">1 hr</button>
+          <button type="button" class="btn btn-light btn-sm btn-time" data="d">1 day</button>
+          <button type="button" class="btn btn-light btn-sm btn-time" data="w">1 week</button>
+          <button type="button" class="btn btn-light btn-sm btn-time" data="m">1 month</button>
+          <button type="button" class="btn btn-light btn-sm btn-time" data="y">1 year</button>
+        </div>
+      </div>
+      <div class="row">
+        <div id="chart1" class="col-12 col-md-12 col-lg-12" style="height: 300px;"> </div>
+      </div>
+   </div>
+  </section>
+  <!-- end: centiment -->
+
+  <!-- topic -->
+  <section id="topic">
+    <div class="container">
+      <div class="row">
+        <div class="heading-text heading-section">
+          <h4 style="margin-bottom: 0px;">Topic</h4>
+        </div>
+      </div>        
+      <div class="row">
+        <input type="hidden" id="topic_name" value="{{ topic_name }}">
+        <input type="hidden" id="topic_frequency" value="{{ topic_frequency }}">
+        <div class="col-6 col-md12 col-lg-6">
+          <canvas id="topic1_chart" width="350" height="250" style="display: block; width: 350px; height: 250px;" class="chartjs-render-monitor"></canvas>                
+        </div>
+        <div class="col-6 col-md12 col-lg-6">
+          <canvas id="topic2_chart" width="350" height="250" style="display: block; width: 350px; height: 250px;" class="chartjs-render-monitor"></canvas>                
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- end: topic -->
+
+  <!-- Indicators -->
+  <section id="indicator">
+    <div class="container">
+      <div class="row">
+        <div class="heading-text heading-section">
+          <h4 style="margin-bottom: 0px;">Indicator</h4>
+        </div>
+      </div>        
+      <div class="row">
+        <input type="hidden" id="indicator_data" value="{{ indicators }}">
+          
+        <div class="col-4 col-md12 col-lg-4">
+          <div id="indicator0"></div>
+        </div>
+        <div class="col-4 col-md12 col-lg-4">
+          <div id="indicator1"></div>
+        </div>
+        <div class="col-4 col-md12 col-lg-4">
+          <div id="indicator2"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- end: Indicators -->
 
   <!-- Communa -->
- <section id="communa">
+  <section id="communa">
      <div class="container">
         <div class="row">
-            <div class="heading-text heading-section">
-                <h4 style="margin-bottom: 0px;">Communa</h4>
-            </div>
+          <div class="heading-text heading-section">
+            <h4 style="margin-bottom: 0px;">Communa</h4>
+          </div>
         </div>        
         <div class="row">
-            <div class="col-12 col-md12 col-lg-12">
-            <form method="POST" action="/communa_download">
-                {% csrf_token %}                
-                <select class="select-2" id="communas" name="communas[]" multiple="multiple">
-                {% for c in communas %} 
-                    <option value="{{ c.name }}">{{ c.name }}</option>
-                {% endfor %}
-                </select>
+          <div class="col-12 col-md12 col-lg-12">
+          <form method="POST" action="/communa_download">
+            {% csrf_token %}                
+            <select class="select-2" id="communas" name="communas[]" multiple="multiple">
+            {% for c in communas %} 
+                <option value="{{ c.name }}">{{ c.name }}</option>
+            {% endfor %}
+            </select>
 
-                <button type="submit" class="btn">Default</button>
-
-            </form>
-            </div>
-                
-            
+            <button type="submit" class="btn">Default</button>
+          </form>
+          </div>
         </div>
      </div>
- </section>
- <!-- end: communa -->
+  </section>
+  <!-- end: communa -->
+
+  <!-- Export -->
+  <section id="export">
+    <div class="container">
+      <div class="row">
+        <div class="heading-text heading-section">
+          <h4 style="margin-bottom: 0px;">Export</h4>
+        </div>
+      </div>        
+      <div class="row">
+        <div class="col-12">
+          <form method="post" action="./export_data" id="export_form">
+            {% csrf_token %} 
+            <input type="hidden" id="export_type" name="export_type" value="tweets">
+          </form>
+          <button type="button" class="btn btn-light btn-sm" id="export_twitter">Twitter</button>
+          <button type="button" class="btn btn-light btn-sm" id="export_topic">Topic</button>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- end: Export -->
 
 </div>
 {% endblock %}

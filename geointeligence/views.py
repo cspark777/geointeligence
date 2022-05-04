@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect
 from django.contrib import messages
-from django.http import StreamingHttpResponse
+from django.http import StreamingHttpResponse, HttpResponse
 from wsgiref.util import FileWrapper
 from .models import Topic, Indicator, Communa
 
@@ -39,11 +39,11 @@ def dashboard(request):
 
     return render(request,'geointeligence/dashboard.html', context)
 
-header_data = {
-    "communa": "communa",        
-}
 
 def get_communa_csv_files(communas):
+    header_data = {
+        "communa": "communa",        
+    }
     csv_files = []
         
     for c in communas:
@@ -93,6 +93,60 @@ def communa_download(request):
         )
 
         response['Content-Disposition'] = 'attachment;filename=communa.zip'
+        return response
+
+    else:        
+        return redirect('/dashboard')
+
+def get_export_csv_file(export_type):
+    result = []
+    header_data = {}
+    contents = []
+
+    if export_type == "tweets":
+        header_data = ["owner_id","tweet","polarity","date"]
+
+        contents = [
+            ["1","this is sample tweet1","Netural","2022-04-20 12:30:00"],
+            ["1","this is sample tweet2","Negative","2022-04-20 12:31:00"],
+            ["1","this is sample tweet3","Positive","2022-04-20 12:32:00"]
+        ]
+
+    else:
+        header_data = ["topic","date","org_text"]
+
+        contents = [
+            ["covid","2022-04-20 12:30:00","this is topic1"],
+            ["vaccine","2022-04-21 12:30:00","this is topic2"],
+            ["ukraine","2022-04-22 12:30:00","this is topic3"]
+        ]
+
+    result.append(header_data)
+    for content in contents:
+       result.append(content)    
+        
+    return result
+
+
+def export_data(request):
+    if request.method == 'POST':
+        export_type = request.POST.get('export_type')
+
+        print("-------------------------", export_type)
+
+        
+        csv_contents = get_export_csv_file(export_type)
+      
+        response = HttpResponse(
+            content_type='text/csv',
+            headers={'Content-Disposition': 'attachment; filename="export_' + export_type + '.csv"'},
+        )
+
+        writer = csv.writer(response)
+    
+        for c in csv_contents:
+            writer.writerow(c)        
+        
         return response
 
     else:        
