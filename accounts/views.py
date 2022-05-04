@@ -64,6 +64,8 @@ def register(request):
                 to_email = email
 
                 send_mail(mail_subject, message, settings.EMAIL_HOST_USER, [to_email])
+
+                print(settings.EMAIL_HOST_USER, to_email)
                 '''
                 email = EmailMessage(
                             mail_subject, message, to=[to_email]
@@ -98,7 +100,8 @@ def activate(request, uidb64, token):
     if user is not None and account_activation_token.check_token(user, token):
         user.is_active = True
         user.save()
-        login(request, user)
+        print(user)
+        auth.login(request, user)
         # return redirect('home')
         return HttpResponse('Thank you for your email confirmation. Now you can login your account.')
     else:
