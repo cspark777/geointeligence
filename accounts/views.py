@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.models import User, auth
+from django.conf import settings
 
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
@@ -62,12 +63,13 @@ def register(request):
                 })
                 to_email = email
 
-                #send_mail(mail_subject, message, 'rodinaleksandr0103@gmail.com', [to_email])
-                
+                send_mail(mail_subject, message, settings.EMAIL_HOST_USER, [to_email])
+                '''
                 email = EmailMessage(
                             mail_subject, message, to=[to_email]
                 )
                 email.send()
+                '''
                 
                 return HttpResponse('Please confirm your email address to complete the registration')
 
